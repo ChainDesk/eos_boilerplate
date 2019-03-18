@@ -42,7 +42,7 @@ echo "=== setup wallet: 1. eosio ==="
 cleos wallet create -n eosio --to-console | tail -1 | sed -e 's/^"//' -e 's/"$//' > eosio_wallet_password.txt
 cleos wallet import -n eosio --private-key 5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3
 
-echo "=== setup wallet: 2. testioadmin ==="
+echo "=== setup wallet: 2. hackdappexch ==="
 # account: eosio.token 
 cleos wallet create -n eosio.token --to-console | tail -1 | sed -e 's/^"//' -e 's/"$//' > eosiotoken_wallet_password.txt
 cleos wallet import -n eosio.token --private-key 5K7mtrinTFrVTduSxizUc5hjXJEtTjVTsqSHeBHes1Viep86FP5
@@ -51,10 +51,12 @@ cleos create account eosio eosio.token EOS6kYgMTCh1iqpq9XGNQbEi8Q6k5GujefN9DSs55
 cleos wallet create -n testio.token --to-console | tail -1 | sed -e 's/^"//' -e 's/"$//' > testio.token_wallet_password.txt
 cleos wallet import -n testio.token --private-key 5KLqT1UFxVnKRWkjvhFur4sECrPhciuUqsYRihc1p9rxhXQMZBg
 cleos create account eosio testio.token EOS78RuuHNgtmDv9jwAzhxZ9LmC6F295snyQ9eUDQ5YtVHJ1udE6p EOS78RuuHNgtmDv9jwAzhxZ9LmC6F295snyQ9eUDQ5YtVHJ1udE6p
+
 # account: superadmin
-cleos wallet create -n testioadmin --to-console | tail -1 | sed -e 's/^"//' -e 's/"$//' > testioadmin_wallet_password.txt
-cleos wallet import -n testioadmin --private-key 5JpWT4ehouB2FF9aCfdfnZ5AwbQbTtHBAwebRXt94FmjyhXwL4K
-cleos wallet import -n testioadmin --private-key 5JD9AGTuTeD5BXZwGQ5AtwBqHK21aHmYnTetHgk1B3pjj7krT8N
+cleos wallet create -n hackdappexch --to-console | tail -1 | sed -e 's/^"//' -e 's/"$//' > hackdappexch_wallet_password.txt
+cleos wallet import -n hackdappexch --private-key 5JpWT4ehouB2FF9aCfdfnZ5AwbQbTtHBAwebRXt94FmjyhXwL4K
+cleos wallet import -n hackdappexch --private-key 5JD9AGTuTeD5BXZwGQ5AtwBqHK21aHmYnTetHgk1B3pjj7krT8N
+cleos create account eosio hackdappexch EOS6PUh9rs7eddJNzqgqDx1QrspSHLRxLMcRdwHZZRL4tpbtvia5B EOS8BCgapgYA2L4LJfCzekzeSr3rzgSTUXRXwNi8bNRoz31D14en9
 
 # account: feeadmin
 cleos wallet create -n feeadmin --to-console | tail -1 | sed -e 's/^"//' -e 's/"$//' > feeadmin_wallet_password.txt
@@ -78,14 +80,14 @@ echo "=== deploy smart contract ==="
 # $3 wallet for unlock the account
 # $4 password for unlocking the wallet
 
-deploy_contract.sh eosio.token eosio.token eosio $(cat eosio_wallet_password.txt)
-deploy_contract.sh eosio.token testio.token testio.token $(cat testio.token_wallet_password.txt)
+# deploy_contract.sh eosio.token eosio.token eosio $(cat eosio_wallet_password.txt)
+# deploy_contract.sh eosio.token testio.token testio.token $(cat testio.token_wallet_password.txt)
 
-echo "=== init contract's data ==="
-cleos push action eosio.token create '{"issuer":"eosio.token", "maximum_supply":"1000000000.0000 EOS"}' -p eosio.token
-cleos push action testio.token create '{"issuer":"testio.token", "maximum_supply":"1000000000.0000 TESTIO"}' -p testio.token
-cleos push action eosio.token issue '[ "eosio.token", "1000000000.0000 EOS", "memo" ]' -p eosio.token
-cleos push action testio.token issue '[ "testio.token", "1000000000.0000 TESTIO", "memo" ]' -p testio.token
+# echo "=== init contract's data ==="
+# cleos push action eosio.token create '{"issuer":"eosio.token", "maximum_supply":"1000000000.0000 EOS"}' -p eosio.token
+# cleos push action testio.token create '{"issuer":"testio.token", "maximum_supply":"1000000000.0000 TESTIO"}' -p testio.token
+# cleos push action eosio.token issue '[ "eosio.token", "1000000000.0000 EOS", "memo" ]' -p eosio.token
+# cleos push action testio.token issue '[ "testio.token", "1000000000.0000 TESTIO", "memo" ]' -p testio.token
 
 echo "=== create test accounts ==="
 # script for create data into blockchain
