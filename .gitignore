@@ -1,2 +1,4 @@
 .history/
 
+docker/data
+build

@@ -6,6 +6,19 @@
   },
   "tasks": [
     {
+        "label": "StopChain",
+        "type": "shell",
+        "command": "sh ${workspaceRoot}/.vscode/scripts/dockerservice.sh stop ${workspaceFolderBasename}"
+    }, {
+        "label": "RestartChain",
+        "type": "shell",
+         "command": "sh ${workspaceRoot}/.vscode/scripts/dockerservice.sh restart ${workspaceFolderBasename}"
+    }, {
+        "label": "NewStartChain",
+        "type": "shell",
+        "command": "sh ${workspaceRoot}/.vscode/scripts/dockerservice.sh restart ${workspaceFolderBasename} -rm"
+    },
+    {
       "label": "CompileContract",
       "type": "shell",
       "command": "sh ${workspaceRoot}/.vscode/scripts/compile.sh ${fileDirname} ${fileBasenameNoExtension} ${workspaceFolderBasename}"
@@ -16,19 +29,9 @@
       "command": "sh ${workspaceRoot}/.vscode/scripts/deploy.sh ${fileDirname} ${fileBasenameNoExtension} ${workspaceFolderBasename}",
     },
     {
-      "label": "StopChain",
-      "type": "shell",
-      "command": "sh ${workspaceRoot}/.vscode/scripts/dockerservice.sh stop ${workspaceFolderBasename}"
-    },
-    {
-        "label": "RestartChain",
-        "type": "shell",
-        "command": "sh ${workspaceRoot}/.vscode/scripts/dockerservice.sh restart ${workspaceFolderBasename}"
-    },
-    {
         "label": "jesttest",
         "type": "shell",
-        "command": "sh ${workspaceRoot}/.vscode/scripts/test.sh  tests/${fileBasename} "
+        "command": "sh ${workspaceRoot}/.vscode/scripts/test.sh tests/${fileBasename} "
     },
   ]
 }

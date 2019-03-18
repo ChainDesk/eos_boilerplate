@@ -9,7 +9,7 @@ then
     echo "== stop docker container and rm the data dir."
     docker stop "$2" || true && docker rm --force "$2" || true
 else
-    contracts/bin/start_eosio_docker.sh --rm "$2"
+    docker/start_eosio_docker.sh "$2" "$3"
 fi
 
 
